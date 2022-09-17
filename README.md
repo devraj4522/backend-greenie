@@ -11,4 +11,7 @@
    ```
 ## Use Case Diagram
 ![use case diagram for greenie](https://raw.githubusercontent.com/devraj4522/backend-greenie/main/docs/use%20case%20diagram%20-%20greenie.webp)
-    
+
+## Class Diagram
+![class diagram for greenie](https://raw.githubusercontent.com/devraj4522/backend-greenie/main/docs/classdiagram.drawio.png)
+
