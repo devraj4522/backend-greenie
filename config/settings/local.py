@@ -1,5 +1,6 @@
 from .base import *  # noqa
 from .base import env
+import os
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -12,6 +13,10 @@ SECRET_KEY = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+
+RAILWAYS_EXTERNAL_HOSTNAME = os.environ.get('RAILWAYS_EXTERNAL_HOSTNAME')
+if RAILWAYS_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RAILWAYS_EXTERNAL_HOSTNAME)
 
 # CACHES
 # ------------------------------------------------------------------------------
