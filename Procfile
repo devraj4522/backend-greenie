@@ -1,1 +1,1 @@
-web: gunicorn 'backend_greenie.wsgi'
+web: gunicorn 'config.wsgi'
