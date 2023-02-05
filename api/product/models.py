@@ -1,6 +1,6 @@
 from django.db import models
 from api.category.models import Category
-from api.user.models import CustomUser
+from api.user_app.models import 
 from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
@@ -29,7 +29,7 @@ class Review(models.Model):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE)
     user = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE)
+        , on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

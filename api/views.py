@@ -1,7 +1,11 @@
-from django.http import JsonResponse
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
 # Create your views here.
 
 
-def home(request):
-    return JsonResponse({'info': 'Django ReactAPI', 'name': "Dev Raj Singh"})
+class HomeView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, format=None):
+        return Response({'info': 'Django ReactAPI', 'name': "Dev Raj Singh"})

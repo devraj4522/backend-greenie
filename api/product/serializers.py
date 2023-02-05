@@ -4,7 +4,7 @@ from pyexpat import model
 from unicodedata import category
 from rest_framework import serializers
 from .models import Product, Review
-from api.user.models import CustomUser
+from api.user_app.models import CustomUser
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -30,4 +30,4 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'title', 'description', 'product',
-                  'user', 'rating', 'updated_at')
+                  'user', 'rating', 'created', 'updated')

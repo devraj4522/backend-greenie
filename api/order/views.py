@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
-from .serializers import OrderSerializer
-from .models import Order
+# from .serializers import OrderSerializer
+# from .models import Order
 from django.views.decorators.csrf import csrf_exempt
-
+from integeration.signal import email_sent
 # Create your views here.
 
 
@@ -39,12 +39,14 @@ def add(request, id, token):
         except UserModel.DoesNotExist:
             return JsonResponse({'error': 'User does not exist'})
 
-        ordr = Order(user=user, product_names=products, total_products=total_pro,
-                     transaction_id=transaction_id, total_amount=amount)
-        ordr.save()
+        # ordr = Order.objects.create(user=user, product_names=products, total_products=total_pro,
+        #              transaction_id=transaction_id, total_amount=amount)
+
+        #send signal for mail
+        # email_sent.send(sender=__name__, to='to@example.com', subject='Subject', message='Message')
         return JsonResponse({'success': True, 'error': False, 'msg': 'Order placed Successfully'})
 
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all().order_by('id')
-    serializer_class = OrderSerializer
+# class OrderViewSet(viewsets.ModelViewSet):
+#     queryset = Order.objects.all().order_by('id')
+#     serializer_class = OrderSerializer
