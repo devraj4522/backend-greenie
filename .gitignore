@@ -277,3 +277,4 @@ MailHog
 backend_greenie/media/
 
 .pytest_cache/
+.env
