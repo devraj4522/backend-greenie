@@ -1,1 +1,1 @@
-web: pip install -r requirements/base.txt && python manage.py migrate &&  gunicorn 'config.wsgi'
+web:  python manage.py migrate &&  gunicorn 'config.wsgi'
