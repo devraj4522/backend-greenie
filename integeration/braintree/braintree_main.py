@@ -71,4 +71,4 @@ class BrainTreeMain(object):
 # if __name__=='__main__':
 #     braintree = BrainTreeMain()
 #     token = braintree.gateway.client_token.generate()
-#     # print(token)
+#     print(token)

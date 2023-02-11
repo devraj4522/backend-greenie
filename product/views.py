@@ -35,7 +35,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ['id','name', 'price', 'stock']
+    filterset_fields = ['id','name', 'price', 'stock', 'category']
     search_fields = ['name', 'description']
     page_size = 20
 
@@ -53,7 +53,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ['title','description', 'rating', ]
+    filterset_fields = ['title','description', 'rating', 'product__id']
     search_fields = ['title', 'description']
     page_size = 20
 
