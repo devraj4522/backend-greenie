@@ -67,7 +67,7 @@ class UserView(APIView):
                     },
                     "user" : GreenieUserSerializer(greenie_user).data
                 }
-        return FormattedResponse(msg=response_data).create()
+        return FormattedResponse(data=response_data, msg="Login successful!").create()
 
     def post(self, request, format=None):
         email = request.data['email']
