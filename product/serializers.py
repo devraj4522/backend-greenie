@@ -18,5 +18,10 @@ class ProductSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('id', 'title', 'description', 'rating', 'product', 'user', 'is_active')
+        fields = ('id', 'title', 'description', 'rating', 'product', 'is_active', 'created', 'modified')
+
+    def to_representation(self, instance):
+        data =  super().to_representation(instance)
+        data['user'] = {'id': instance.user.id, 'name': instance.user.name, 'images': instance.user.images}
+        return data
 

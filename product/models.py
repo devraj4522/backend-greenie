@@ -40,7 +40,7 @@ class Product(TimeStampedModel):
     
 
 class Review(TimeStampedModel):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=200)
     description = models.CharField(max_length=250)
     rating = models.IntegerField(default=1, validators=[
                                  MaxValueValidator(5), MinValueValidator(1)])
