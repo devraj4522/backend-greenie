@@ -80,28 +80,32 @@ class CartView(APIView):
         greenie_user = user.greenie_user
         product = request.data['product_id']
         keep_in_cart = request.data['is_add'] # add or remove item from cart
+
+        try:
+            product = Product.objects.get(id=product)
+        except ObjectDoesNotExist:
+            return FormattedResponse(error=True, msg='Product not exist.', data={}).create()    
         if keep_in_cart:
-            Order.objects.create(user=greenie_user, product__id=product, status=StatusType.ADDED_TO_CART)
+            Order.objects.create(user=greenie_user, product=product, status=StatusType.ADDED_TO_CART)
             query_data = Order.objects.filter(user=greenie_user, is_active=True, status=StatusType.ADDED_TO_CART)
-            response_data = OrderSerializer(query_data, many=True)
+            response_data = OrderSerializer(query_data, many=True).data
             return FormattedResponse(msg='Added to Cart Successfully.', data=response_data).create()
         else:
             orders = Order.objects.filter(user=greenie_user, is_active=True, status=StatusType.ADDED_TO_CART)
-            current_product_in_cart = orders.filter(product__id=product)
+            current_product_in_cart = orders.filter(product=product)
             if len(current_product_in_cart):
                 order = current_product_in_cart.latest('modified')
                 order.status = StatusType.VIEWED
                 order.save()
-                orders.remove(order)
-            response_data = OrderSerializer(orders, many=True)
+            response_data = OrderSerializer(orders, many=True).data
             return FormattedResponse(msg='Removed from cart', data=response_data).create()
 
     def get(self, request, format=None):
         user = request.user
         greenie_user = user.greenie_user
         query_data = Order.objects.filter(user=greenie_user, is_active=True, status=StatusType.ADDED_TO_CART)
-        response_data = OrderSerializer(query_data, many=True)
-        return FormattedResponse(msg='Added to Cart Successfully.', data=response_data).create()
+        response_data = OrderSerializer(query_data, many=True).data
+        return FormattedResponse(msg='Cart fetched.', data=response_data).create()
 
 class CreateOrderView(APIView):
     """
