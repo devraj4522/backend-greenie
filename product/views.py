@@ -7,9 +7,12 @@ from .models import Category, Product, Review
 from rest_framework.filters import SearchFilter,OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from user.permissions import IsAdminUser
+from rest_framework.pagination import PageNumberPagination
 
 # Create your views here.
 
+class CustomPagination(PageNumberPagination):
+    page_size = 5
 
 class CategoryViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
@@ -38,6 +41,23 @@ class ProductViewSet(viewsets.ModelViewSet):
     filterset_fields = ['id','name', 'price', 'stock', 'category']
     search_fields = ['name', 'description']
     page_size = 20
+
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            self.permission_classes = [IsAdminUser]
+        return super().get_permissions()
+
+
+class ProductListViewSet(generics.ListAPIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated, )
+    queryset = Product.objects.filter(is_active=True)
+    serializer_class = ProductSerializer
+
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['id','name', 'price', 'stock', 'category']
+    search_fields = ['name', 'description']
+    pagination_class = CustomPagination
 
     def get_permissions(self):
         if self.request.method == 'POST':
