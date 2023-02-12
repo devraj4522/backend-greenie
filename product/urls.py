@@ -14,5 +14,7 @@ router.register(r'', views.ProductViewSet)
 urlpatterns = [
     # path('review/add/<str:product_id>/<str:token>/',
     #      views.add, name='product.add'),
-    path('', include(router.urls))
+     path('product-list/', views.ProductListViewSet.as_view(), name='product-list'),
+    path('', include(router.urls)),
+    
 ]
