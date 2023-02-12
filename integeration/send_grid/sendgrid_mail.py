@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 configuration = sib_api_v3_sdk.Configuration()
 
-class SendInBlueException():
+class SendInBlueException(Exception):
     def __init__(self, error_msg):
         self.error_msg = error_msg
     
