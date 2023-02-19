@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from product.models import Product
-from .models import Order, Txn
+from .models import Order, Txn, DeleveryAddress
 from django.core.exceptions import ObjectDoesNotExist
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -20,4 +20,9 @@ class OrderSerializer(serializers.ModelSerializer):
 class TxnSerializer(serializers.ModelSerializer):
     class Meta:
         model = Txn
+        fields = '__all__'
+
+class DeleveryAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DeleveryAddress
         fields = '__all__'

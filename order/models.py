@@ -11,7 +11,7 @@ from .model_helpers import TxnType, StatusType
 class Purchase(TimeStampedModel):
     id = ShortUUIDField(length=8, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ", primary_key=True, editable=False)
     address = models.ForeignKey(DeleveryAddress, on_delete=models.CASCADE, null=True, blank=True, related_name='purchases')
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='purchases')
 
 class Order(TimeStampedModel):
     id = ShortUUIDField(length=8, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ", primary_key=True, editable=False)
@@ -28,6 +28,5 @@ class Txn(TimeStampedModel):
     amt = models.IntegerField(default=0)
     txn_date = models.DateField(blank=True, null=True)
     note =  models.TextField(blank=True, null=True)
-    type = models.CharField(max_length=15, default=TxnType.DEBIT, choices=TxnType.choices)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, related_name='txns')
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE, null=True, blank=True, related_name='txns')

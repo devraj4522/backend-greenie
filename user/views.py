@@ -21,7 +21,7 @@ from django.conf import settings
 from rest_framework.authtoken.models import Token
 from .serializers import GreenieUserSerializer, DeleveryAddressSerializer
 from backend_greenie.users.models import User
-from .model_helpers import GenderType
+from .model_helpers import GenderType, AddressType
 from rest_framework.filters import SearchFilter,OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -167,3 +167,46 @@ class CreateAddress(APIView):
         address_obj = DeleveryAddress.objects.create(user = greenie_user, city = city, state = state, address = address, pincode = pincode, phone = phone, type = type)
         response_data = DeleveryAddressSerializer(address_obj).data
         return FormattedResponse(msg='Address Created Successfully.', data=response_data).create()
+
+
+class UpdateDeleveryAddressView(APIView):
+    """
+    Delvery address add or edit or view.
+    """
+    def patch(self, request, format=None):
+        id = request.data['id']
+        city = request.data.get('city')
+        state = request.data.get('state')
+        address = request.data.get('address')
+        pincode = request.data.get('pincode')
+        phone = request.data.get('phone')
+        type = request.data.get('type')
+
+        user = request.user
+        greenie_user = user.greenie_user
+
+        try:
+            address_obj = DeleveryAddress.objects.get(id=id)
+        except ObjectDoesNotExist:
+            return FormattedResponse(error=True, msg="Address not found.", data={})
+        
+        if city:
+            address_obj.city = city
+        if state:
+            address_obj.state = state
+        if address:
+            address_obj.address = address
+        if pincode:
+            address_obj.pinpincode =pincode
+        if phone:
+            address_obj.phone = phone
+        if type:
+            address_obj.type = AddressType[type]
+        
+        address_obj.save()
+
+        addresses = DeleveryAddress.objects.filter(user=greenie_user, is_active=True)
+        response_data = DeleveryAddressSerializer(addresses, many=True).data
+
+        return FormattedResponse(data=response_data, msg="Address updated successfully.").create()
+        

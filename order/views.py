@@ -15,6 +15,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from product.models import Product
 from django.db.models import Q
 from django.db.models import Prefetch
+from order.models import Purchase
+from user.serializers import DeleveryAddressSerializer
+from user.model_helpers import AddressType
 
 from integeration.braintree.braintree_main import BrainTreeMain
 bt = BrainTreeMain()
@@ -127,7 +130,7 @@ class CreateOrderView(APIView):
             return FormattedResponse(error=True, msg='First Add Delevery Address.').create()
 
         if not is_order_through_cart:
-            products = request.data['products']
+            products = request.data.get('products')
             products_query = Product.objects.filter(id__in=products.keys())
             if len(products_query) != len(products):
                 return FormattedResponse(error=True, msg="All Product must exist.").create()
