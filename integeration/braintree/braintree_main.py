@@ -44,7 +44,7 @@ class BrainTreeMain(object):
         return {'clientToken': token, 'success': True}
 
 
-    def process_payment(self, id, token, payment_nonce, amount):
+    def process_payment(self, payment_nonce, amount):
         # if not self.__validate_user_session(id, token):
         #     return {'error': 'Invalid session, Please login again!'}
 
@@ -60,9 +60,7 @@ class BrainTreeMain(object):
             })
 
             if result.is_success:
-                return {
-                    # NOTE: transaction spelling bug was fixed later
-                    "success": result.is_success, 'transaction': {'id': result.transaction.id, 'amount': result.transaction.amount}}
+                return {"error": False,  "success": result.is_success, 'transaction': {'id': result.transaction.id, 'amount': result.transaction.amount}}
             else:
                 return {'error': True, 'sucess': False}
         except Exception as e:

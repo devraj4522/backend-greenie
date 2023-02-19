@@ -12,6 +12,7 @@ urlpatterns = [
     path('user-address/<str:id>', views.AddressView.as_view(), name='user-address'),
     path('user-address-list', views.AddressListView.as_view(), name='user-address-list'),
     path('create-address/', views.CreateAddress.as_view(), name='create-address'),
+    path('update-address/', views.UpdateDeleveryAddressView.as_view(), name='update-address'),
     path("test/", views.TestView.as_view(), name="test"),
     path('', include(router.urls))
 ]
