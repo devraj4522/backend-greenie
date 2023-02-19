@@ -28,11 +28,11 @@ class MakePayment(APIView):
     permission_classes = (IsAuthenticated, )
     
     def post(self, request, format=None):
-        paymentMethodNonce = request.data['paymentMethodNonce']
+        paymentMethodNonce = self.request.data['paymentMethodNonce']
         amount = request.data['amount']
         products= request.data['products']
         address = request.data['address_id']
-        
+        # print(paymentMethodNonce, amount, products)
         user = request.user
         try:
             greenie_user = user.greenie_user
@@ -44,8 +44,10 @@ class MakePayment(APIView):
         except ObjectDoesNotExist:
             return FormattedResponse(error=True, msg="Address not exists.", data={}).create()
 
-        orders = Order.objects.filter(status=StatusType.PAYMENT_PENDING, is_active=True, product__id__in=products)
+        orders = Order.objects.filter(user= greenie_user, status=StatusType.PAYMENT_PENDING, is_active=True, product__id__in=products)
+        print(orders)
         actual_price_sum = orders.aggregate(total=Sum('product__price'))['total']
+        print(actual_price_sum)
         if actual_price_sum != amount:
             return FormattedResponse(error=True, msg="Total amount is not equal to order amount.", data={}).create()
 
@@ -63,7 +65,7 @@ class MakePayment(APIView):
             order.save()
         
         # create a purchase under which all order will go
-        purchase = Purchase.objects.create(address=address_obj, user=greenie_user)
+        purchase = Purchase.objects.create(address=address_obj, user=user)
         today = datetime.now().date()
         txns = []
         for order in orders:
