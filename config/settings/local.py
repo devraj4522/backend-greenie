@@ -68,3 +68,16 @@ CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+CELERY_BROKER_URL = env("REDIS_URL", default="redis://127.0.0.1:6379")
+CELERY_RESULT_BACKEND = env("REDIS_URL", default="redis://127.0.0.1:6379")
+CELERY_TASK_ROUTES = {
+ '*.tasks.*': {'queue': os.getenv('CELERY_QUEUE_NAME')},
+}
+CELERY_TASK_CREATE_MISSING_QUEUES = 1
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 500
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_ACKS_LATE = True
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
