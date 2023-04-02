@@ -12,7 +12,8 @@ SECRET_KEY = env(
     default="r3HF4UBjkXb4367pGwq9G8IF7PnbagZO9xGYhpXe6QVJD6qmzMZ8wsM1OvN1AlGI",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "backend-greenie-production-efac.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ['*']
 
 RAILWAYS_EXTERNAL_HOSTNAME = os.environ.get('RAILWAYS_EXTERNAL_HOSTNAME')
 if RAILWAYS_EXTERNAL_HOSTNAME:
