@@ -53,6 +53,7 @@ class SendInBlueMain():
         
         try:
             api_response = api_instance.send_transac_email(send_smtp_email)
+            print("api_response: ")
             pprint(api_response)
         except ApiException as e:
             return SendInBlueException("Exception when calling SMTPApi->send_transac_email: %s\n" % e)
