@@ -18,8 +18,8 @@ ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "backend-greenie-productio
 RAILWAYS_EXTERNAL_HOSTNAME = os.environ.get('RAILWAYS_EXTERNAL_HOSTNAME')
 if RAILWAYS_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RAILWAYS_EXTERNAL_HOSTNAME)
-
-CSRF_TRUSTED_ORIGINS = ["https://backend-greenie-production-efac.up.railway.app", f"https://{os.environ.get('RAILWAYS_EXTERNAL_HOSTNAME')}"]
+    ALLOWED_HOSTS.append('https://backend-greenie.onrender.com')
+CSRF_TRUSTED_ORIGINS = ["https://backend-greenie-production-efac.up.railway.app", f"https://{os.environ.get('RAILWAYS_EXTERNAL_HOSTNAME')}", "https://backend-greenie.onrender.com"]
 # CACHES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
