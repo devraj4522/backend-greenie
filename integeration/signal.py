@@ -2,7 +2,7 @@ from django.dispatch import receiver, Signal
 from .tasks import test_task, send_mail_task
 
 # test_signal = Signal(providing_args=[""])
-email_sent = Signal()
+email_sent = Signal(providing_args=["to_users", "subject", "html_content"])
 
 # @receiver(test_signal)
 # def test_signal_s(sender, **kwargs):

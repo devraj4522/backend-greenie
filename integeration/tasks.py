@@ -8,7 +8,7 @@ def test_task():
     sleep(2)
     print("task completed.")
 
-@celery_app.task(serializer='json')
+# @celery_app.task(serializer='json')
 def send_mail_task(to_users, subject, html_content):
     send_blue = SendInBlueMain()
     send_blue.send_mail(to_users, subject, html_content)
