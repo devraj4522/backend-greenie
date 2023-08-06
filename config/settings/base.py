@@ -44,7 +44,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'greenie',
         'CLIENT': {
-            'host': env.db("DATABASE_URL", default="postgres:///backend_greenie"),
+            'host': env("DATABASE_URL", default="postgres:///backend_greenie"),
         },
     }
 }
