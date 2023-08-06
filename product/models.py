@@ -24,7 +24,7 @@ class Category(TimeStampedModel):
 class Product(TimeStampedModel):
     id = ShortUUIDField(length=8, alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ", primary_key=True, editable=False)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=250)
     price = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -41,7 +41,7 @@ class Product(TimeStampedModel):
 
 class Review(TimeStampedModel):
     title = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
     rating = models.IntegerField(default=1, validators=[
                                  MaxValueValidator(5), MinValueValidator(1)])
     product = models.ForeignKey(

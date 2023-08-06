@@ -50,15 +50,16 @@ class SendInBlueMain():
         headers = {"Some-Custom-Name":"unique-id-1234"}
         params = {"parameter":"My param value","subject":"New Subject"}
         send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(to=to, bcc=bcc, cc=cc, reply_to=reply_to, headers=headers, html_content=html_content, sender=sender, subject=subject)
-        
         try:
             api_response = api_instance.send_transac_email(send_smtp_email)
-            pprint(api_response)
+            print("api_response for email: ")
+            print(api_response)
         except ApiException as e:
+            print(e)
             return SendInBlueException("Exception when calling SMTPApi->send_transac_email: %s\n" % e)
 
 
 if __name__ == "__main__" :
     print("main:")
-    # s = SendInBlueMain()
+    s = SendInBlueMain()
     # s.send_mail([("Dev Raj Singh", "rehansingh.4522@gmail.com")], "Hi", "<h1>close</h1>", ("dev raj singh", "rehansingh.4522@gmail.com"))

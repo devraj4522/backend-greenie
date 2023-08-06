@@ -1,13 +1,11 @@
 from django.db import models
 from api.category.models import Category
-from api.user_app.models import 
 from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250)
     price = models.CharField(max_length=50)
     stock = models.CharField(max_length=50)
     is_active = models.BooleanField(default=True, blank=True)
@@ -23,7 +21,6 @@ class Product(models.Model):
 
 class Review(models.Model):
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=250)
     rating = models.IntegerField(default=1, validators=[
                                  MaxValueValidator(5), MinValueValidator(1)])
     product = models.ForeignKey(

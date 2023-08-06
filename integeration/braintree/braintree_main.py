@@ -58,7 +58,7 @@ class BrainTreeMain(object):
                     "submit_for_settlement": True
                 }
             })
-
+            print(result)
             if result.is_success:
                 return {"error": False,  "success": result.is_success, 'transaction': {'id': result.transaction.id, 'amount': result.transaction.amount}}
             else:

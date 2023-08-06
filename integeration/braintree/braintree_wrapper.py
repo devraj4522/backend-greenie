@@ -9,7 +9,6 @@ class BrainTreeWrapper(object):
             raise BrainTreeException('Payment mode must be test or prod')
         self.mode = mode
         self.brain_tree = BrainTreeMain(self.mode)
-        self.payment_token = self.brain_tree.generate_token()
 
     def make_payment(self, nonce, amount):
         

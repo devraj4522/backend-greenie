@@ -11,7 +11,6 @@ from django.contrib.auth import login, logout
 from django.core.exceptions import ObjectDoesNotExist
 import random
 import re
-from integeration.signal import test_signal
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from backend_greenie.utils.response_formatting import FormattedResponse
