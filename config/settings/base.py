@@ -44,6 +44,7 @@ DATABASES = {
         "DATABASE_URL",
         default="postgres:///backend_greenie",
     ),
+}
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
