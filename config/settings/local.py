@@ -12,12 +12,14 @@ SECRET_KEY = env(
     default="r3HF4UBjkXb4367pGwq9G8IF7PnbagZO9xGYhpXe6QVJD6qmzMZ8wsM1OvN1AlGI",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "backend-greenie-production-efac.up.railway.app", "backend-greenie.onrender.com"]
+ALLOWED_HOSTS += env.list("DJANGO_ALLOWED_HOSTS", default=["example.com"])
 
 RAILWAYS_EXTERNAL_HOSTNAME = os.environ.get('RAILWAYS_EXTERNAL_HOSTNAME')
 if RAILWAYS_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RAILWAYS_EXTERNAL_HOSTNAME)
 
+CSRF_TRUSTED_ORIGINS = ["https://backend-greenie-production-efac.up.railway.app", f"https://backend-greenie-production.up.railway.app", "https://backend-greenie.onrender.com"]
 # CACHES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
@@ -68,3 +70,16 @@ CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+CELERY_BROKER_URL = env("REDIS_URL", default="redis://127.0.0.1:6379")
+CELERY_RESULT_BACKEND = env("REDIS_URL", default="redis://127.0.0.1:6379")
+CELERY_TASK_ROUTES = {
+ '*.tasks.*': {'queue': os.getenv('CELERY_QUEUE_NAME')},
+}
+CELERY_TASK_CREATE_MISSING_QUEUES = 1
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 500
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_ACKS_LATE = True
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'

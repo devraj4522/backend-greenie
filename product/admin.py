@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewtAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'description', 'rating', 'product', 'user', 'is_active')
+    list_display = ('id', 'title', 'rating', 'product', 'user', 'is_active')
     ordering = ['-modified']
 
 

@@ -1,21 +1,21 @@
-from django.core.signals import Signal
-from django.dispatch import receiver
-from .tasks import test_task
+from django.dispatch import receiver, Signal
+from .tasks import test_task, send_mail_task
 
-test_signal = Signal()
+# test_signal = Signal(providing_args=[""])
 email_sent = Signal()
 
-@receiver(email_sent)
-def test_signal(sender, **kwargs):
-    print(sender)
-    test_task.delay()
-    print("signal recieved")
+# @receiver(test_signal)
+# def test_signal_s(sender, **kwargs):
+#     print("signal started")
+#     test_task.delay()
+#     print("signal recieved")
 
+# test_signal.send(sender=None)
 
 @receiver(email_sent)
-def send_email_task(sender, **kwargs):
+def send_email_signal(sender, **kwargs):
     # print(sender)
-    to = kwargs.get('to')
+    to_users = kwargs.get('to_users')
     subject = kwargs.get('subject')
-    message = kwargs.get('message')
-    # send_email.delay(to, subject, message)
+    message = kwargs.get('html_content')
+    send_mail_task.delay(to_users, subject, message)
