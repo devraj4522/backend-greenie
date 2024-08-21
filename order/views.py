@@ -81,8 +81,9 @@ class CartView(APIView):
     def post(self, request, format=None):
         user = request.user
         greenie_user = user.greenie_user
-        product = request.data['id']
-        keep_in_cart = request.data['is_add'] # add or remove item from cart
+        data = request.data['product_id']
+        product = data['id']
+        keep_in_cart = data['is_add'] # add or remove item from cart
 
         try:
             product = Product.objects.get(id=product)
