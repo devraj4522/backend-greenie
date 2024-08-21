@@ -84,7 +84,7 @@ class CartView(APIView):
         try:
             data = request.data['product_id']
             product = data['id']
-        except KeyError:
+        except:
             product = request.data['product_id']
         
         keep_in_cart = request.data['is_add'] # add or remove item from cart
