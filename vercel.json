@@ -6,7 +6,7 @@
     },
      "commands": [
       "pip install --no-cache-dir -r requirements.txt",
-      "pip install --no-cache-dir psycopg2-binary==2.9.5",
+      "pip install --no-cache-dir psycopg2-binary==2.9.5"
   },
   "routes": [
     {
