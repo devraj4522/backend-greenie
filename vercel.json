@@ -4,10 +4,10 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "config/wsgi.py"   // Adjust this path to your actual entry point
+      "dest": "config/wsgi.py"
     }
   ],
   "env": {
-    "PYTHON_VERSION": "3.9"      // Optional, only include if needed
+    "PYTHON_VERSION": "3.9"
   }
 }
