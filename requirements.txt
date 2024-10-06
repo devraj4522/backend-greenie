@@ -27,7 +27,7 @@ drf-spectacular==0.25.1  # https://github.com/tfranzel/drf-spectacular
 
 Werkzeug[watchdog]==2.2.2 # https://github.com/pallets/werkzeug
 ipdb==0.13.11  # https://github.com/gotcha/ipdb
-psycopg2-binary==2.9.8  # https://github.com/psycopg/psycopg2
+#psycopg2-binary==2.9.8  # https://github.com/psycopg/psycopg2
 watchfiles==0.18.1  # https://github.com/samuelcolvin/watchfiles
 
 # Testing
