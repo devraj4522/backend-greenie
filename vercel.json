@@ -3,7 +3,11 @@
   "build": {
     "env": {
       "PYTHON_VERSION": "3.9"  
-    }
+    },
+     "commands": [
+      "pip install --no-cache-dir -r requirements.txt",
+      "pip install --no-cache-dir psycopg2-binary==2.9.5"
+    ]
   },
   "routes": [
     {
