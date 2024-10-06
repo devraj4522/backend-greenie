@@ -3,7 +3,6 @@
   "builds": [
     {
       "src": "config/wsgi.py",
-      "use": "@vercel/python"
     }
   ],
   "env": {
